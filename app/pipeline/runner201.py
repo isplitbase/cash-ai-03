@@ -210,9 +210,8 @@ def run_colab201(api_payload: Dict[str, Any]) -> Dict[str, Any]:
         env["WORK_DIR"] = str(work_dir)
 
         # 2) colab1-3-1.py（kousya の場合のみ実行）
-        kousya_flag = None
-        if isinstance(data, dict):
-            kousya_flag = data.get("kousya")
+
+        kousya_flag = api_payload.get("kousya")
 
         if kousya_flag == "kousya" and ORIGINAL_SCRIPT_131.exists():
             _run(["python3", str(ORIGINAL_SCRIPT_131)], cwd=work_dir, env=env)
