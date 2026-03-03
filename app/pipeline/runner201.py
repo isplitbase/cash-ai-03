@@ -213,8 +213,7 @@ def run_colab201(api_payload: Dict[str, Any]) -> Dict[str, Any]:
 
         kousya_flag = api_payload.get("kousya")
 
-        if kousya_flag == "kousya" and ORIGINAL_SCRIPT_131.exists():
-            _run(["python3", str(ORIGINAL_SCRIPT_131)], cwd=work_dir, env=env)
+
         # 出力ファイル
         out_excel_201 = work_dir / "CF付財務分析表（経営指標あり）_ReadingData_updated.xlsx"
         out_cf = work_dir / "CF資金移動表_updated.xlsx"
@@ -222,18 +221,14 @@ def run_colab201(api_payload: Dict[str, Any]) -> Dict[str, Any]:
         # 1) colab201.py
         if kousya_flag == "kousya" and ORIGINAL_SCRIPT_201.exists():
             _run(["python3", str(ORIGINAL_SCRIPT_201)], cwd=work_dir, env=env)
+            _run(["python3", str(ORIGINAL_SCRIPT_131)], cwd=work_dir, env=env)
             out_cf = work_dir / "CF付財務分析表（経営指標あり）_ReadingData_updated.xlsx"
         else :
             _run(["python3", str(ORIGINAL_SCRIPT_201IPAN)], cwd=work_dir, env=env)
-            
-            
             # 3) colab1-5.py（kousya の場合のみ実行）
             _run(["python3", str(ORIGINAL_SCRIPT_15)], cwd=work_dir, env=env)
             out_excel_201 = work_dir / "CF資金移動表_updated.xlsx"
-        
-
-
-
+            
         if not out_excel_201.exists():
             raise RuntimeError("更新済みExcelが生成されませんでした（colab201.py のログを確認してください）")
         if not out_cf.exists():
