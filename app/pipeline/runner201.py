@@ -229,6 +229,8 @@ def run_colab201(api_payload: Dict[str, Any]) -> Dict[str, Any]:
             if out_cf.exists():
                 out_cf.unlink()
             shutil.move(str(out_excel_201), str(out_cf))
+            _run(["python3", str(ORIGINAL_SCRIPT_201)], cwd=work_dir, env=env)
+            _run(["python3", str(ORIGINAL_SCRIPT_131)], cwd=work_dir, env=env)
         else :
             _run(["python3", str(ORIGINAL_SCRIPT_201IPAN)], cwd=work_dir, env=env)
             # 3) colab1-5.py（kousya の場合のみ実行）
