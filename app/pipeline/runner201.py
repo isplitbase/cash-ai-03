@@ -221,7 +221,7 @@ def run_colab201(api_payload: Dict[str, Any]) -> Dict[str, Any]:
         out_cf = work_dir / "CF資金移動表_updated.xlsx"
         out_log = work_dir / "transfer_log.txt"
         # 1) colab201.py
-        if kousya_flag == "kousya" and ORIGINAL_SCRIPT_131.exists():
+        if kousya_flag == "kousya" and ORIGINAL_SCRIPT_201.exists():
             _run(["python3", str(ORIGINAL_SCRIPT_201)], cwd=work_dir, env=env)
             out_cf = work_dir / "CF付財務分析表（経営指標あり）_ReadingData_updated.xlsx"
         else :
@@ -272,6 +272,7 @@ def run_colab201(api_payload: Dict[str, Any]) -> Dict[str, Any]:
         # ★既存返却を維持（トップレベルは up1 で埋める）
         return {
             "runner": "runner201",
+            "kousya_flag": kousya_flag,
             "ai_case_id": ai_case_id,
             "excel_filename": up1["excel_filename"],
             "s3_bucket": up1["s3_bucket"],
